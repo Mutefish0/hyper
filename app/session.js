@@ -6,6 +6,7 @@ const defaultShell = require('default-shell');
 const {getDecoratedEnv} = require('./plugins');
 const {productName, version} = require('./package');
 const config = require('./config');
+const log = require('./utils/log');
 
 const createNodePtyError = () =>
   new Error(
@@ -127,6 +128,7 @@ module.exports = class Session extends EventEmitter {
       if (this.ended) {
         return;
       }
+      log(chunk);
       this.batcher.write(chunk);
     });
 
